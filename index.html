@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Rick and Morty</title>
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico.png" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header>
+      <h1>API de Rick and Morty</h1>
+      <div>
+        <label for="name">Digite o nome personagem:</label>
+        <input type="text" id="name" placeholder="ex.: Morty" />
+        <input type="submit" value="Pesquisar" class="buttons" onclick="searchCharacterByName()" />
+      </div>
+    </header>
+    <main>
+      <div class="contentList"></div>
+    </main>
+    <footer>
+      <button class="buttons" id="previousPage">voltar pág.</button>
+      <button class="buttons" id="nextPage" onclick="nextPage()">próx. pág.</button>
+      <p>© Eduardo Ribas, 2024</p>
+    </footer>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="api.js"></script>
+    <script src="scripts.js"></script>
+  </body>
+</html>
