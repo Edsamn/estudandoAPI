@@ -1,5 +1,6 @@
 const characterContainer = document.querySelector(".contentList");
 let initialPage = 1;
+const pageNumber = document.getElementById("pageNumber");
 
 async function getCharacters() {
   try {
@@ -17,6 +18,7 @@ async function getCharacters() {
       <p> ${character.species} </p>
       `;
       characterContainer.appendChild(userCard);
+      pageNumber.textContent = `Página atual: ${initialPage}`;
     });
   } catch (error) {
     console.log(error);
@@ -44,6 +46,7 @@ async function searchCharacterByName() {
       <p> ${character.species} </p>
       `;
       characterContainer.appendChild(userCard);
+      pageNumber.textContent = `Página atual: ${initialPage}`;
     });
   } catch (error) {
     console.log(error);
@@ -71,6 +74,7 @@ async function nextPage() {
         <p> ${character.species} </p>
         `;
       characterContainer.appendChild(userCard);
+      pageNumber.textContent = `Página atual: ${initialPage}`;
     });
   } catch (error) {
     console.log(error);
@@ -98,6 +102,7 @@ async function previousPage() {
         <p> ${character.species} </p>
         `;
       characterContainer.appendChild(userCard);
+      pageNumber.textContent = `Página atual: ${initialPage}`;
     });
   } catch (error) {
     console.log(error);
