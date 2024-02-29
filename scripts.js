@@ -1,4 +1,5 @@
 const characterContainer = document.querySelector(".contentList");
+let initialPage = 1;
 
 async function getCharacters() {
   try {
@@ -51,9 +52,12 @@ async function searchCharacterByName() {
 
 async function nextPage() {
   try {
-    const response = await api.get(`/character`);
-    const nextPageUrl = response.data.info.next;
+    if (initialPage) {
+      initialPage += 1;
+    }
+    const response = await api.get(`/character?page=${initialPage}`);
     const characters = response.data.results;
+
     characterContainer.innerHTML = "";
 
     characters.forEach((character) => {
@@ -61,14 +65,40 @@ async function nextPage() {
       userCard.classList.add("userCard");
 
       userCard.innerHTML = `
-      <img src='${character.image}' alt=''>
-      <p> ${character.name} </p>
-      <p> ${character.status} </p>
-      <p> ${character.species} </p>
-      `;
+        <img src='${character.image}' alt=''>
+        <p> ${character.name} </p>
+        <p> ${character.status} </p>
+        <p> ${character.species} </p>
+        `;
       characterContainer.appendChild(userCard);
     });
-    window.location.href = `${nextPageUrl}`;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+async function previousPage() {
+  try {
+    if (initialPage > 1) {
+      initialPage -= 1;
+    }
+    const response = await api.get(`/character?page=${initialPage}`);
+    const characters = response.data.results;
+
+    characterContainer.innerHTML = "";
+
+    characters.forEach((character) => {
+      const userCard = document.createElement("div");
+      userCard.classList.add("userCard");
+
+      userCard.innerHTML = `
+        <img src='${character.image}' alt=''>
+        <p> ${character.name} </p>
+        <p> ${character.status} </p>
+        <p> ${character.species} </p>
+        `;
+      characterContainer.appendChild(userCard);
+    });
   } catch (error) {
     console.log(error);
   }
