@@ -1,6 +1,7 @@
 const characterContainer = document.querySelector(".contentList");
 const pageNumber = document.getElementById("pageNumber");
 const prevButton = document.getElementById("previousPage");
+const nextButton = document.getElementById("nextPage");
 const nameValue = document.getElementById("name").value;
 const searchButton = document.getElementById("searchButton");
 const header = document.getElementById("header");
@@ -22,6 +23,7 @@ const renderOnDisplay = (character) => {
 
 async function getCharacters() {
   try {
+    header.textContent = "";
     const response = await api.get(`/character?page=${initialPage}`);
     const characters = response.data.results;
 
@@ -51,6 +53,8 @@ async function searchCharacterByName() {
       renderOnDisplay(filteredCharacter);
     });
     pageNumber.textContent = `Total de páginas da pesquisa: ${totalPages}`;
+    prevButton.disabled;
+    nextButton.disabled;
     if (pageSelect === totalPages) {
       searchButton.disabled;
       pageNumber.textContent = `Fim da pesquisa.`;
